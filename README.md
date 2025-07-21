@@ -78,10 +78,6 @@ Contributing:
 -------------
 Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
 
-Contact:
---------
-For any queries or suggestions, feel free to contact [Your Name] (your.email@example.com).
-
 License:
 --------
 This project is for educational purposes only.
