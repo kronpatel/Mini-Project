@@ -1,0 +1,106 @@
+
+
+
+===================================================MINI PROJECT================================================================
+                                   ********************************************************************
+                                       MENTAL STRESS DETECTION IN STUDENTS USING MACHINE LEARNING
+                                   ********************************************************************
+CODE:
+# Importing pandas for data manipulation
+import pandas as pd 
+# Importing numpy for numerical operations
+import numpy as np  
+# Reading the CSV file into a pandas DataFrame
+data = pd.read_csv("stress.csv")
+data
+# Importing Natural Language Toolkit for text processing
+import nltk  
+# Importing regular expressions for text cleaning 
+import re 
+# Downloading the stopwords from NLTK
+nltk.download('stopwords')
+# Initializing the stemmer
+stemmer = nltk.SnowballStemmer("english")  
+# Importing stopwords 
+from nltk.corpus import stopwords  
+# Importing string for punctuation handling
+import string  
+# Getting the set of stopwords
+stopword = set(stopwords.words('english'
+def clean(text):
+# Converting text to lowercase
+   text = str(text).lower() 
+# Removing text inside square brackets 
+    text = re.sub('\[.*?\]', '', text)  
+ # Removing URLs
+    text = re.sub('https?://\S+|www\.\S+', '', text)  
+ # Removing HTML tags
+    text = re.sub('<.*?>+', '', text)  
+# Removing punctuation
+    text = re.sub('[%s]' % re.escape(string.punctuation), '',text)   
+# Removing newline characters
+    text = re.sub('\n', '', text)  
+# Removing words containing digits
+    text = re.sub('\w*\d\w*', '', text)
+# Removing stopwords
+    text = [word for word in text.split(' ') if word not in stopword])
+# Joining the words back into a single string
+    text = " ".join(text)  
+# Stemming the words
+     text = [stemmer.stem(word) for word in text.split(' ')]  
+# Joining the stemmed words back into a single string
+      text = " ".join(text)  
+    return text
+# Applying the clean function to the 'text' column
+data["text"] = data["text"].apply(clean)
+# Importing matplotlib for visualization
+import matplotlib.pyplot as plt  
+# Importing WordCloud for word cloud generation
+from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator 
+# Combining all the text into a single string for word cloud generation
+text = " ".join(i for i in data.text)
+# Getting the set of stopwords for word cloud
+stopwords = set(STOPWORDS)  
+wordcloud=WordCloud(stopwords=stopwords, background_color="white").generate(text)
+# Displaying the word cloud
+plt.figure(figsize=(15, 10))
+plt.imshow(wordcloud, interpolation='bilinear')
+# Hiding the axes
+plt.axis("off")  
+plt.show()
+# Mapping label values to more readable strings
+data["label"] = data["label"].map({0: "No Stress", 1: "Stress"})
+# Selecting only the 'text' and 'label' columns
+data = data[["text", "label"]]  
+# Importing CountVectorizer for text vectorization
+from sklearn.feature_extraction.text import CountVectorizer  
+# Importing train_test_split for data splitting
+from sklearn.model_selection import train_test_split  
+# Converting text and labels to numpy arrays
+x = np.array(data["text"])
+y = np.array(data["label"])
+# Initializing the CountVectorizer
+cv = CountVectorizer()
+# Fitting and transforming the text data
+X = cv.fit_transform(x)  
+# Splitting the data into training and testing sets
+xtrain,xtest,ytrain,ytest=train_test_split(X,y, test_size=0.3, random_state=42)
+# Importing Bernoulli Naive Bayes model
+from sklearn.naive_bayes import BernoulliNB  
+# Initializing and training the model
+model = BernoulliNB()
+model.fit(xtrain, ytrain)
+BernoulliNB()
+# Getting user input and predicting the stress label
+user = input("Text")
+data = cv.transform
+output=model.predict(data)
+output
+*******
+OUTPUT
+*******
+input
+user = input("Text")
+TextThese past couple of months have been the worst. My anxiety has gotten so bad itâ€™s effecting my sleep and relationship. Iâ€™ve become so paranoid about my health as well. I donâ€™t feel like me anymore and I just feel scared all the time now over every little thing. I donâ€™t have money to see a therapist either...
+output
+array(['Stress'], dtype='<U9')
