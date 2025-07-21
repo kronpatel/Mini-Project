@@ -49,7 +49,7 @@ label: 1 = Stress, 0 = No Stress
 How to Run:
 -----------
 1. Clone the repository
-   git clone https://github.com/your-username/Mini-Project.git
+   git clone https://github.com/kronpatel/Mini-Project
    cd Mini-Project
 
 2. Install dependencies
