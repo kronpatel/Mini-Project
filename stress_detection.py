@@ -33,15 +33,6 @@ def clean(text):
 # 4. Apply cleaning to the text column
 data["text"] = data["text"].apply(clean)
 
-# 5. Word Cloud Visualization
-text = " ".join(i for i in data.text)
-stopwords_wc = set(STOPWORDS)
-wordcloud = WordCloud(stopwords=stopwords_wc, background_color="white").generate(text)
-plt.figure(figsize=(15, 10))
-plt.imshow(wordcloud, interpolation='bilinear')
-plt.axis("off")
-plt.show()
-
 # 6. Label mapping
 data["label"] = data["label"].map({0: "No Stress", 1: "Stress"})
 data = data[["text", "label"]]
