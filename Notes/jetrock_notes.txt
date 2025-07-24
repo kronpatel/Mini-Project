@@ -1,0 +1,19 @@
+WordCloud visualization (matplotlib + WordCloud lib) ka code temporarily script se hata diya gaya hai.
+
+Reason:
+- Abhi ke use-case me iska koi output ya requirement nahi hai.
+- Lekin agar future me data visualization add karna ho (e.g., report, dashboard), to ye block reuse ho sakta hai.
+
+Code snippet backup:
+--------------------------------------
+#Word Cloud Visualization
+text = " ".join(i for i in data.text)
+stopwords_wc = set(STOPWORDS)
+wordcloud = WordCloud(stopwords=stopwords_wc, background_color="white").generate(text)
+plt.figure(figsize=(15, 10))
+plt.imshow(wordcloud, interpolation='bilinear')
+plt.axis("off")
+plt.show()
+--------------------------------------
+
+Status: Only removed from stress_detection.py main script, not deleted permanently.
